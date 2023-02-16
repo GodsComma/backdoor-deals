@@ -1,8 +1,6 @@
 services:
   application:
     build: backdoor-deals/
-    environment:
-      - DOCKER_BUILDKIT=0
     ports:
       - "3000:3000"
     volumes:

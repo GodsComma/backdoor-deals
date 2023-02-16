@@ -28,9 +28,10 @@ Please Following the following steps listed here:
 
   Once docker and docker-compose has been installed users can run the program fairly easily using the following commands
 
-  1. `docker-compose build` (May require sudo)
-  2. `docker-compose up` (Running it as a foreground process)
-  3. `docker-compose up -d` (Running it as a daemon process)
+  1. `npm install` Run this inside of the backdoor-deals folder inside the repo
+  2. `docker-compose build` (May require sudo)
+  3. `docker-compose up` (Running it as a foreground process)
+  4. `docker-compose up -d` (Running it as a daemon process)
      1. `docker-compose logs -f <image_id>`
         1. `docker-compose ps` (to see running container)
 
