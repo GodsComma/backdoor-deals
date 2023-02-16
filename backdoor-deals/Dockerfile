@@ -1,8 +1,8 @@
 FROM node:19-alpine3.16
 WORKDIR /app
-COPY . .
-RUN npm ci
+COPY package*.json ./
 # Build the app
-RUN npm run build
+COPY . .
+RUN npm install -g && npm install 
 EXPOSE 3000
-CMD [ "npm", "run", "dev" ]
+CMD [ "next", "dev" ]

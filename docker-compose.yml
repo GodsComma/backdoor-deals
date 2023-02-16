@@ -1,7 +1,11 @@
+version: "3.9"
 services:
-  application:
+  web:
     build: backdoor-deals/
     ports:
       - "3000:3000"
     volumes:
-      - ./backdoor-deals/:/app/
+      - type: bind
+        source: ./backdoor-deals/ 
+        target: /app/
+      - /app/node_modules
