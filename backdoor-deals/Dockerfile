@@ -1,8 +1,15 @@
-FROM node:19-alpine3.16
+FROM node:latest
+
 WORKDIR /app
-COPY package*.json ./
-# Build the app
+
+COPY ./package.json ./
+
+ENV PATH /app/node_modules/.bin:$PATH
+
 COPY . .
-RUN npm install -g && npm install 
+
+RUN npm install --silent
+
 EXPOSE 3000
-CMD [ "next", "dev" ]
+
+CMD ["next", "dev"]  
