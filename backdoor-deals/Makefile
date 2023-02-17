@@ -10,6 +10,11 @@ start: ##@ start the application.
 logs: ##@run show logs
 	docker-compose logs -f
 
+.PHONY: stop
+stop: ##@stop the application
+	docker-compose stop
+
+
 .PHONY: clean
 clean: ##@clean up the application
 	docker-compose down -v
