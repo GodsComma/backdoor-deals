@@ -2,7 +2,13 @@
   "compilerOptions": {
     "target": "es2017",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "paths": {
+      "components/*": ["./src/components/*"],
+      "contexts/*": ["./src/contexts/*"],
+			"crypto/*": ["./src/crypto/*"],
+      "user/*": ["./src/user/*"],
+		},
+		"allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
