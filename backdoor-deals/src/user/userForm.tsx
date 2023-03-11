@@ -12,7 +12,7 @@ export const UserForm = () => {
         UserData.name = name;
         UserData.regTime = new Date().toString();
         localStorage.setItem('UserData', JSON.stringify(UserData));
-        window.location.replace('/chat');
+        window.location.replace('/lobby/abs');
         return
     }
 

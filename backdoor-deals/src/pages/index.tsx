@@ -34,7 +34,7 @@ const Home: NextPage = () => {
     if( !!localData ) {
       const { regTime } =  JSON.parse(localData || '{}');
       if (CheckIfUserVaild(regTime)) {
-        window.location.replace('/chat');
+        window.location.replace('/lobby/abc');
         return
       }
     }
