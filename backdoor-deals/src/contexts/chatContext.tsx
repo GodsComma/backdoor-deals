@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createContext, useContext, useReducer } from 'react';
 import { Chat, ChatReducer } from './chatReducer';
 

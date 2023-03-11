@@ -1,5 +1,7 @@
+/* eslint-disable */
+
 export type User = {
-    name: String
+    name: string
 }
 
 export type Chat = {

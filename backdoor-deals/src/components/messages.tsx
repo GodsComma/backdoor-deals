@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Chat } from "contexts/chatReducer"
 
 export const UserMessage = ({data}: Chat) => {

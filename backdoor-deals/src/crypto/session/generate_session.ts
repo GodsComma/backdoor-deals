@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { type CipherGCMTypes , type CipherGCM, createCipheriv, randomBytes } from "crypto";
 
 class SessionKey {
@@ -31,6 +32,6 @@ class SessionKey {
 
 };
 
-const CreateKey = new SessionKey('aes-256-gcm');
+const CreateKey = new SessionKey('aes-256-gcm')
 
 export { CreateKey };

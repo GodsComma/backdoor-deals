@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useChatInteraction } from "contexts/chatContext";
 import { ACTION_TYPES, Chat } from "contexts/chatReducer";
 import { useState, createRef, useEffect } from "react";
@@ -27,10 +28,12 @@ export default function UserInput() {
                 name: 'Sulav'
             }
         }
-        dispatch({
-            type: ACTION_TYPES.SEND_MESSAGE,
-            ...tempChat
-        })
+        if (dispatch){
+            dispatch({
+                type: ACTION_TYPES.SEND_MESSAGE,
+                ...tempChat
+            })
+        }
         if (textInput.current) {
             textInput.current.value = '';
         }
