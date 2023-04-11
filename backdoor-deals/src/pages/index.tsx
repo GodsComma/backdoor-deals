@@ -6,10 +6,12 @@ import UserForm from "user/userForm";
 import Layout from "../components/layout";
 
 
+/* Renders layout for homepage with button for lobby test. Default export of module which can be used by other pages in this app.*/
 const Home: NextPage = () => {
 
   const [ isOpen, setOpen  ] = useState(false);
 
+  /*checks if user's registration is valid by comparing to current time and expiration*/
   const CheckIfUserVaild  = (user_time: string) => {
     if (!user_time){
       return false;
@@ -28,6 +30,7 @@ const Home: NextPage = () => {
     
   }
 
+  /*redirects user to lobby if user data is valid (i.e. if their time has not expired)*/
   const handleClick = () => {
     const localData = localStorage.getItem('UserData');
 
