@@ -1,107 +1,62 @@
-/* eslint-disable */
-import { useChatInteraction } from "contexts/chatContext";
-import { ACTION_TYPES, Chat } from "contexts/chatReducer";
-import { useState, createRef, useEffect } from "react";
+/* eslint-disable */ // Disables eslint rules for this file
+import { useChatInteraction } from "contexts/chatContext"; // Imports the `useChatInteraction` hook from the "chatContext" module
+import { ACTION_TYPES, Chat } from "contexts/chatReducer"; // Imports the "ACTION_TYPES" and "Chat" types from the "chatReducer" module
+import { useState, createRef, useEffect } from "react"; // Imports the `useState`, `createRef`, and `useEffect` hooks from the "react" module
 
-
+// Exports a component named "UserInput" as the default export
 export default function UserInput() {
-    const [currentMessage, setCurrentMsg] = useState('');
-    const dispatch = useChatInteraction();
-    const textInput = createRef<HTMLInputElement>();
+    const [currentMessage, setCurrentMsg] = useState(''); // Defines a state variable named "currentMessage" and its setter function "setCurrentMsg", initialized to an empty string
+    const dispatch = useChatInteraction(); // Calls the `useChatInteraction` hook and assigns its return value to the "dispatch" constant
+    const textInput = createRef<HTMLInputElement>(); // Defines a ref named "textInput" using the `createRef` function from "react"
 
-
+    // Defines a function named "textInputFocus" that focuses the "textInput" ref
     function textInputFocus() {
-        function focus() {
-            const node = textInput.current;
-            if (node) {
-                node.focus()
+        function focus() { // Defines a nested "focus" function
+            const node = textInput.current; // Gets the current value of the "textInput" ref
+            if (node) { // If it exists
+                node.focus() // Focuses on it
             }
         }
-        focus();
+        focus(); // Calls the "focus" function
     }
 
+    // Defines a function named "handleChat" that sends a message and clears the input field
     function handleChat() {
-        const tempChat: Chat = {
-            data: currentMessage,
-            timestamp: Date.now().toString(),
-            user: {
+        const tempChat: Chat = { // Defines a temporary "Chat" object
+            data: currentMessage, // Sets its "data" property to the current message
+            timestamp: Date.now().toString(), // Sets its "timestamp" property to the current timestamp
+            user: { // Sets its "user" property to an object with a "name" property
                 name: 'Sulav'
             }
         }
-        if (dispatch){
-            dispatch({
-                type: ACTION_TYPES.SEND_MESSAGE,
-                ...tempChat
+        if (dispatch){ // If the "dispatch" function exists
+            dispatch({ // Dispatches an action object to the chat reducer
+                type: ACTION_TYPES.SEND_MESSAGE, // Sets its "type" property to "SEND_MESSAGE"
+                ...tempChat // Includes the properties of the "tempChat" object
             })
         }
-        if (textInput.current) {
-            textInput.current.value = '';
+        if (textInput.current) { // If the "textInput" ref exists
+            textInput.current.value = ''; // Clears its value
         }
-        return 0;
+        return 0; // Returns a value of 0
     }
 
+    // Defines a function named "handleKey" that calls "handleChat" when the Enter key is pressed
     function handleKey(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.key === "Enter") {
-            handleChat();
+        if (event.key === "Enter") { // If the pressed key is Enter
+            handleChat(); // Calls the "handleChat" function
         }
 
     }
 
+    // Defines an effect that calls the "textInputFocus" function when the component mounts or updates
     useEffect(() => {
-        textInputFocus();
+        textInputFocus(); // Calls the "textInputFocus" function
     })
 
+    // Renders the component
     return (
         <div className="absolute inset-x-0 bottom-0 p-16 bg-stone-900">
             <div className="relative ">
                 <span className="absolute inset-y-0 items-center">
-                    <button type="button" className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-stone-500  hover:cursor-not-allowed hover:bg-gray-800 focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-white-500">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
-                        </svg>
-                    </button>
-                </span>
-                <input
-                    className="w-full focus:outline-stone-700 focus:placeholder-gray-400 text-white placeholder-white-600 pl-12 bg-stone-700 rounded-md py-3"
-                    ref={textInput}
-                    type="text"
-                    onKeyDown={handleKey}
-                    placeholder="Write your message!"
-                    onChange={(e) => setCurrentMsg(e.target.value)}
-                />
-                <Actions onClick={handleChat} />
-            </div>
-        </div>
-    );
-}
-
-
-const Actions = ({ onClick }: { onClick?: React.MouseEventHandler }) => {
-
-    return (
-        <div className="absolute right-0 items-center inset-y-0 sm:flex">
-            <button type="button" className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:cursor-not-allowed hover:bg-gray-800 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-white-500">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
-                </svg>
-            </button>
-            <button type="button" className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:cursor-not-allowed hover:bg-gray-800 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-white-500">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-            </button>
-            <button type="button" className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:cursor-not-allowed hover:bg-gray-800 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-white-500">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-            </button>
-            <button type="button" onClick={onClick} className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
-                <span className="font-bold">Send</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-6 w-6 ml-2 transform rotate-90">
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                </svg>
-            </button>
-        </div>
-    )
-};
+                    <button type="button" className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-stone-500  hover:cursor-not-
